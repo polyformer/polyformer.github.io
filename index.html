@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="PolyFormer: Referring Image Segmentation as Sequential Polygon Generation">
+  <meta name="keywords" content="Polyformer, Referring Image Segmentation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PolyFormer: Referring Image Segmentation as Sequential Polygon Generation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="icon" href="./static/images/aws.png">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  </head>
+  <body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PolyFormer:</h1>
+          <h2 class="title is-2 publication-title">Referring Image Segmentation as Sequential Polygon Generation</h2>
+          <div class="is-size-5">
+            <span class="author-block">
+                <a href="https://joellliu.github.io/">Jiang Liu<sup>1*&#x2628;</sup>
+                </a>,                
+            </span>
+            <span class="author-block">
+              <a href="http://www.huiding.org" >Hui Ding<sup>2*</sup></a>,</span>
+            <span class="author-block">
+              <a href="https://zhaoweicai.github.io/" >Zhaowei Cai<sup>2</sup></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.ytzhang.net/" >Yuting Zhang<sup>2</sup></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.sg/citations?user=4ngycwIAAAAJ&hl=en" >Ravi Kumar Satzoda<sup>2</sup></a>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=n9fRgvkAAAAJ&hl=en">Vijay Mahadevan<sup>2</sup></a>,
+            </span>  
+            <span class="author-block">
+              <a href="http://ciir.cs.umass.edu/~manmatha/" >R. Manmatha<sup>2</sup></a>
+            </span>
+          </div>
+
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> Johns Hopkins University, </span>
+            <span class="author-block"><sup>2</sup> AWS AI Labs</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal Contribution, </span>
+            <span class="author-block"><sup>&#x2628;</sup>Work done during internship at AWS AI Labs </span>
+          </div>
+
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b style="color:#e08ba0; font-weight:normal"> <b>In CVPR 2023</b> </b></span>
+          </div>
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2302.07387.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+              
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video (coming soon)</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" width="120%" src="images/teaser.gif">
+      <h2 class="subtitle has-text-centered">
+        <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 1. PolyFormer is a unified model for referring image segmentation (polygon vertex sequence) and referring expression
+comprehension (bounding box corner points). The polygons are converted to segmentation masks in the end.</b></p>
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this work, instead of directly predicting the pixel-level
+            segmentation masks, the problem of referring image segmentation is formulated as <b>sequential polygon generation</b>,
+            and the predicted polygons can be later converted into segmentation masks. <b>This is enabled by a new sequence-to-sequence framework, Polygon Transformer (PolyFormer),
+            which takes a sequence of image patches and text query tokens as input, and outputs a sequence of polygon vertices
+            autoregressively</b>. For more accurate geometric localization,
+            we propose a <b>regression-based decoder</b>, which predicts the
+            precise floating-point coordinates directly, without any coordinate quantization error. In the experiments, PolyFormer
+            outperforms the prior art by a clear margin, e.g., 5.40%
+            and 4.52% absolute improvements on the challenging RefCOCO+ and RefCOCOg datasets. It also shows <b>strong
+            generalization ability </b> when evaluated on the referring video
+            segmentation task without fine-tuning, e.g., achieving competitive 61.5% J&F on the Ref-DAVIS17 dataset.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <br>
+    <br>
+    <!-- Paper video.
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://user-images.githubusercontent.com/11957155/209045241-916ccf73-d29d-4637-8502-027d3420875c.mp4"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+
+    <!--/ Demo.
+    <br>
+    <br>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Demo</h2>
+      </div>
+    </div>
+
+    <div class="column is-full-width">
+      <div class="columns is-centered">
+        <img id="teaser" width="90%" src="images/demo6_AdobeExpress.gif">
+      </div>
+      <div class="columns is-centered">
+      <h1>
+        <p style="font-family:Times New Roman"><b>X-GPT: Connecting generalist X-Decoder with GPT-3</b>
+      </h1>                 
+      </div>
+    </div>-->
+
+    <br>
+
+    <!--/ Paper video. -->
+    <!-- Paper Model. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-six-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+                  <img id="pipeline" width="110%" src="images/pipeline.gif">
+        <h3 class="subtitle has-text-centered">
+          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 2.  Overview of PolyFormer architecture. The model takes an image and its corresponding language expression as input, and
+outputs the floating-point 2D coordinates of bounding box and polygons in an autoregressive way.</b></p>
+        </h3>
+        <br>
+          <p>
+            <b>PolyFormer has several innovative designs</b>:
+          </p>
+          <ul>
+            <li>It provides a unified framework for referring image segmentation (RIS) and referring expression comprehension (REC) by formulating them as a sequence-to-sequence (seq2seq) prediction problem.</li>
+            <li>It uses a regression-based decoder for accurate coordinate prediction, which outputs continuous 2D coordinates directly without quantization error. To the best of our knowledge, this is the first work formulating geometric localization as a regression task in seq2seq framework.</li>
+            <li>It introduces a separator token that allows it to accurately model fragmented objects with multiple polygons.</li>
+          </ul>
+          <p>
+            <b>For the first time, we show that the polygon-based
+method surpasses mask-based ones across all three
+main referring image segmentation benchmarks, and it
+can also generalize well to unseen scenarios, including
+video and synthetic data.</b>
+          </p>
+        </div>
+        <br>
+        <img id="model" width="50%" src="images/decoder.png">
+        <h3 class="subtitle has-text-centered">
+          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 3. The architecture of the regression-based transformer decoder (a). The 2D coordinate embedding is obtained by bilinear
+interpolation from the nearby grid points, as illustrated in (b).</b></p>
+        </h3>        
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->          
+  </div>
+</section>
+
+<section class="section">
+  <!-- Results. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3">Results</h2>
+      </div>
+    </div>
+  </section>
+  <!--/ Results. -->    
+<div class="container is-max-desktop">
+
+  <!-- Generic Segmentation. -->
+  <div class="columns is-centered">
+    <div class="column is-full-width">
+      <h2 class="title is-4"> Referring Image Segmentation</h2>
+      <img id="ris" width="100%" src="images/ris.png">
+      <h1>
+        <p style="font-family:Times New Roman"><b>Table 1. Comparison with the state-of-the-art methods on three referring image segmentation benchmarks.</b>
+      </h1>                 
+    </div>
+</div>
+
+<div class="container is-max-desktop">
+
+<div class="column is-full-width">
+  <h2 class="title is-4">Referring Expression Comprehension</h2>
+  <img id="rec" width="100%" src="images/rec.png">
+  <h1>
+    <p style="font-family:Times New Roman"><b>Table 2. Comparison with the state-of-the-art methods on three referring expression comprehension benchmarks.</b>
+  </h1>                 
+</div>
+</div>
+
+  <div class="column is-full-width">
+  <h2 class="title is-4">Zero-shot Referring Video Segmentation</h2>
+  <p style="text-align:center;"><img id="rvs" width="50%" src="images/rvs.png"></p>
+        <h3 class="subtitle has-text-centered">
+          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Table 3. Comparison with the state-of-the-art methods on RefDAVIS17. &#8224; Our model is trained on image datasets only.
+ReferFormer is trained on both image and video datasets.</b></p>
+        </h3>
+</div>
+</div>
+
+</section>
+
+<br>
+<section class="section">
+    <!-- Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-six-fifths">
+        <h2 class="title is-3">Visualizations</h2>      
+        </div>
+      </div>
+    </div>
+    <!--/ Results. -->    
+  <div class="container is-max-desktop">
+
+    <!-- Generic Segmentation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Cross-attention Map</h2>
+        <!-- <h1><b>Zero-Shot Segmentation</b></h1> -->
+        <p style="text-align:center;"><img id="attention" width="90%" src="images/attention.gif"></p>
+        <h1>
+          <p style="font-family:Times New Roman"><b>Figure 4. The cross-attention maps of the decoder when generating the polygon. &#9733; is the 2D vertex prediction at each inference step.</b>
+        </h1>
+      </div>
+    </div>
+
+        <!-- Generic Segmentation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Prediction Visualization</h2>
+        <!-- <h1><b>Zero-Shot Segmentation</b></h1> -->
+        <img id="refcocog" width="100%" src="images/refcocog.png">
+        <h1>
+          <p style="font-family:Times New Roman"><b>Figure 5. The results of LAVT (top), SeqTR (middle), and PolyFormer (bottom) on RefCOCOg test set. </b>
+        </h1>
+        <br>
+        <img id="stable" width="100%" src="images/stablediffusion.png">
+        <h1>
+          <p style="font-family:Times New Roman"><b>Figure 6. The results of LAVT (top), SeqTR (middle), and PolyFormer (bottom) on synthetic images generated by <a href="https://ommer-lab.com/research/latent-diffusion-models/">StableDiffusion</a>.</b>
+        </h1>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@article{liu2023polyformer,
+  title={PolyFormer: Referring Image Segmentation as Sequential Polygon Generation},
+  author={Liu, Jiang and Ding, Hui and Cai, Zhaowei and Zhang, Yuting and Satzoda, Ravi Kumar and Mahadevan, Vijay and Manmatha, R},
+  journal={arXiv e-prints},
+  pages={arXiv--2302},
+  year={2023}
+}
+</code></pre>
+  </div>
+</section>
+
+<section class="section" id="Acknowledgement">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgement</h2>
+    <p>
+      This website is adapted from <a
+      href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license"
+                                          href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+      Commons Attribution-ShareAlike 4.0 International License</a>.
+    </p>
+  </div>
+</section>
+
+
+</body>
+</html>
