@@ -247,7 +247,7 @@ video and synthetic data.</b>
 interpolation from the nearby grid points, as illustrated in (b).</b></p>  </h3>
           </div>
 
-         <p> We make two key changes that enable PolyFormer to make accurate polygon and bounding box predictions: </p>
+         <p> <b> We make two key changes that enable PolyFormer to make accurate polygon and bounding box predictions: </b> </p>
           <ul>
             <li> <b>Regression-based decoder: </b> Previous visual seq2seq methods quantize a continuous coordinate into a discrete bin, introducing an inevitable quantization error.
             They formulate coordinate localization as a classification problem to predict one of the bins, which is suboptimal for geometric localization.
@@ -256,10 +256,10 @@ interpolation from the nearby grid points, as illustrated in (b).</b></p>  </h3>
 the common practice in which coordinate feature is indexed from a dictionary with a fixed number of discrete coordinate bins.</li>
           </ul>
           <p>
-            The regression-based decoder consists of two key components:
+           <b> The regression-based decoder consists of two key components: </b>
           </p>
           <ul>
-            <li><b> 2D coordinate embedding layer: </b> To better capture the geometric relationship between x and y and have a more accurate coordinate representation, we build a 2D coordinate codebook and we can obtain the precise coordinate
+            <li><b> 2D coordinate embedding layer: </b> To better capture the geometric relationship between x and y and have a more accurate coordinate representation, we build a 2D coordinate codebook and we obtain the precise coordinate
 embedding for any floating-point 2D coordinate via bilinear interpolation. </li>
             <li><b> Prediction heads: </b> The class head outputs the token types and the coordinate head predicts the 2D coordinates of the referred object bounding
 box corner points and polygon vertices.</li>
