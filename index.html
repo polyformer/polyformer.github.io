@@ -216,7 +216,7 @@ comprehension (bounding box corner points). The polygons are converted to segmen
     <!-- Paper Model. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-six-fifths">
-        <h2 class="title is-3">Method</h2>
+        <h2 class="title is-3">Model</h2>
         <div class="content has-text-justified">
           <img id="pipeline" width="110%" src="images/pipeline.gif">
         <h3 class="subtitle has-text-centered">
@@ -225,20 +225,24 @@ outputs the floating-point 2D coordinates of bounding box and polygons in an aut
         </h3>
         <br>
           <p>
-            <b>PolyFormer has several innovative designs</b>:
+            <b> The main contributions of PolyFormer are summarized as follows</b>:
           </p>
           <ul>
-            <li>It provides a unified framework for referring image segmentation (RIS) and referring expression comprehension (REC) by formulating them as a sequence-to-sequence (seq2seq) prediction problem.</li>
-            <li>It uses a regression-based decoder for accurate coordinate prediction, which outputs continuous 2D coordinates directly without quantization error. To the best of our knowledge, this is the first work formulating geometric localization as a regression task in seq2seq framework.</li>
-            <li>It introduces a separator token that allows it to accurately model fragmented objects with multiple polygons.</li>
-          </ul>
-          <p>
-            <b>For the first time, we show that the polygon-based
+            <li>It provides a <b>unified framework</b> for referring image segmentation (RIS) and referring expression comprehension (REC) by formulating them as a sequence-to-sequence (seq2seq) prediction problem.</li>
+            <li>It uses a <b>regression-based decoder</b> for accurate coordinate prediction, which outputs continuous 2D coordinates directly without quantization error. To the best of our knowledge, this is the first work formulating geometric localization as a regression task in seq2seq framework.</li>
+            <li> <b> For the first time, we show that the polygon-based
 method surpasses mask-based ones across all three
 main referring image segmentation benchmarks, and it
 can also generalize well to unseen scenarios, including
-video and synthetic data.</b>
-          </p>
+video and synthetic data. </b> </li>
+          </ul>
+<!--          <p>-->
+<!--            <b>For the first time, we show that the polygon-based-->
+<!--method surpasses mask-based ones across all three-->
+<!--main referring image segmentation benchmarks, and it-->
+<!--can also generalize well to unseen scenarios, including-->
+<!--video and synthetic data.</b>-->
+<!--          </p>-->
           <br>
           <div>
           <p style="text-align:center;"><img id="decoder" width="50%" src="images/decoder.png"></p>
@@ -247,13 +251,16 @@ video and synthetic data.</b>
 interpolation from the nearby grid points, as illustrated in (b).</b></p>  </h3>
           </div>
           <p>
-            <b>Our regression-based decoder is unique for three critical designs:</b>
+            Previous visual seq2seq methods formulate coordinate localization as a classification problem and obtain
+              coordinate embeddings by indexing from a dictionary with a fixed number of discrete coordinate bins. Instead, we predict the continuous coordinate values directly without quantization error for accurate geometric localization. </p>
+            <p><b>Our regression-based decoder is unique for three critical designs:</b></p>
             <ul>
+<!--              <li> It predicts the continuous coordinate values directly without quantization error for accurate geometric localization. </li>-->
               <li> It generates precise 2D coordinate embedding for any floating-point coordinate by bilinear interpolation of its neighboring indexed embeddings. </li>
-              <li> It predicts the continuous coordinate values directly without quantization error for accurate geometric localization. </li>
               <li> It decouples token type and coordinate prediction, where a coordinate head predicts the 2D coordinates of the referred object bounding box corner points and polygon vertices, and a class head outputs the token types. </li>
+              <li> It introduces a separator token that allows it to accurately model fragmented objects with multiple polygons.</li>
             </ul>
-          </p>
+
 
 <!--         <p> <b> We make two key changes that enable PolyFormer to make accurate polygon and bounding box predictions: </b> </p>-->
 <!--          <ul>-->
