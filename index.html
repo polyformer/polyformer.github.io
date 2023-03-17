@@ -218,7 +218,7 @@ comprehension (bounding box corner points). The polygons are converted to segmen
       <div class="column is-six-fifths">
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
-                  <img id="pipeline" width="110%" src="images/pipeline.gif">
+          <img id="pipeline" width="110%" src="images/pipeline.gif">
         <h3 class="subtitle has-text-centered">
           <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 2.  Overview of PolyFormer architecture. The model takes an image and its corresponding language expression as input, and
 outputs the floating-point 2D coordinates of bounding box and polygons in an autoregressive way.</b></p>
@@ -229,16 +229,9 @@ outputs the floating-point 2D coordinates of bounding box and polygons in an aut
           </p>
           <ul>
             <li>It provides a unified framework for referring image segmentation (RIS) and referring expression comprehension (REC) by formulating them as a sequence-to-sequence (seq2seq) prediction problem.</li>
-            <li>It introduces a separator token that allows it to accurately model fragmented objects with multiple polygons.</li>
             <li>It uses a regression-based decoder for accurate coordinate prediction, which outputs continuous 2D coordinates directly without quantization error. To the best of our knowledge, this is the first work formulating geometric localization as a regression task in seq2seq framework.</li>
-
+            <li>It introduces a separator token that allows it to accurately model fragmented objects with multiple polygons.</li>
           </ul>
-          <p style="text-align:center;"><img id="decoder" width="50%" src="images/decoder.png"></p>
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 3. The architecture of the regression-based transformer decoder (a). The 2D coordinate embedding is obtained by bilinear
-interpolation from the nearby grid points, as illustrated in (b).</b></p>
-        </h3>
-        <br>
           <p>
             <b>For the first time, we show that the polygon-based
 method surpasses mask-based ones across all three
@@ -246,12 +239,17 @@ main referring image segmentation benchmarks, and it
 can also generalize well to unseen scenarios, including
 video and synthetic data.</b>
           </p>
-<!--          <p> Previous visual seq2seq methods quantize a continuous coordinate into a discrete bin, introducing an inevitable quantization error. They formulate coordinate localization as a classification problem-->
-<!--to predict one of the bins, which is suboptimal for geometric localization. To address this issue, we propose a regression-based decoder that does not use quantization, and instead-->
-<!--predicts the continuous coordinate values directly.-->
-<!--          </p>-->
+          <p> We formulate localization as a regression task, due to its success in object detection, where floating-point coordinates are directly predicted without any quantization error.
+            The feature embedding for any floating-point 2D coordinate in PolyFormer is obtained by bilinear interpolation of its
+neighboring indexed embeddings. These critical designs enable PolyFormer to make accurate polygon and bounding box predictions.
+          </p>
+          <p style="text-align:center;"><img id="decoder" width="50%" src="images/decoder.png"></p>
+        <h3 class="subtitle has-text-centered">
+          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 3. The architecture of the regression-based transformer decoder (a). The 2D coordinate embedding is obtained by bilinear
+interpolation from the nearby grid points, as illustrated in (b).</b></p>
+        </h3>
+
         </div>
-        <br>
 
         </div>
       </div>
