@@ -94,7 +94,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2302.07387.pdf" target="_blank"
+                <a href="https://arxiv.org/abs/2302.07387" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -116,7 +116,7 @@
                 <a href="" target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="far fa-laugh-beam"></i>
+                      &#129303;
                   </span>
                   <span>Demo (coming soon)</span>
                   </a>
@@ -126,7 +126,7 @@
                 <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-youtube" style="color:red"></i>
                   </span>
                   <span>Video (coming soon)</span>
                   </a>
@@ -229,9 +229,16 @@ outputs the floating-point 2D coordinates of bounding box and polygons in an aut
           </p>
           <ul>
             <li>It provides a unified framework for referring image segmentation (RIS) and referring expression comprehension (REC) by formulating them as a sequence-to-sequence (seq2seq) prediction problem.</li>
-            <li>It uses a regression-based decoder for accurate coordinate prediction, which outputs continuous 2D coordinates directly without quantization error. To the best of our knowledge, this is the first work formulating geometric localization as a regression task in seq2seq framework.</li>
             <li>It introduces a separator token that allows it to accurately model fragmented objects with multiple polygons.</li>
+            <li>It uses a regression-based decoder for accurate coordinate prediction, which outputs continuous 2D coordinates directly without quantization error. To the best of our knowledge, this is the first work formulating geometric localization as a regression task in seq2seq framework.</li>
+
           </ul>
+          <p style="text-align:center;"><img id="decoder" width="50%" src="images/decoder.png"></p>
+        <h3 class="subtitle has-text-centered">
+          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 3. The architecture of the regression-based transformer decoder (a). The 2D coordinate embedding is obtained by bilinear
+interpolation from the nearby grid points, as illustrated in (b).</b></p>
+        </h3>
+        <br>
           <p>
             <b>For the first time, we show that the polygon-based
 method surpasses mask-based ones across all three
@@ -239,13 +246,13 @@ main referring image segmentation benchmarks, and it
 can also generalize well to unseen scenarios, including
 video and synthetic data.</b>
           </p>
+<!--          <p> Previous visual seq2seq methods quantize a continuous coordinate into a discrete bin, introducing an inevitable quantization error. They formulate coordinate localization as a classification problem-->
+<!--to predict one of the bins, which is suboptimal for geometric localization. To address this issue, we propose a regression-based decoder that does not use quantization, and instead-->
+<!--predicts the continuous coordinate values directly.-->
+<!--          </p>-->
         </div>
         <br>
-        <img id="model" width="50%" src="images/decoder.png">
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman;font-size:medium;text-align:left"><b>Figure 3. The architecture of the regression-based transformer decoder (a). The 2D coordinate embedding is obtained by bilinear
-interpolation from the nearby grid points, as illustrated in (b).</b></p>
-        </h3>        
+
         </div>
       </div>
     </div>
@@ -315,7 +322,9 @@ ReferFormer is trained on both image and video datasets.</b></p>
       <div class="column is-full-width">
         <h2 class="title is-4">Cross-attention Map</h2>
         <!-- <h1><b>Zero-Shot Segmentation</b></h1> -->
-        <p style="text-align:center;"><img id="attention" width="90%" src="images/attention.gif"></p>
+        <p style="text-align:center;"><img id="attention1" width="90%" src="images/attention.gif"></p>
+        <br>
+        <p style="text-align:center;"><img id="attention2" src="images/attention.png"></p>
         <h1>
           <p style="font-family:Times New Roman"><b>Figure 4. The cross-attention maps of the decoder when generating the polygon. &#9733; is the 2D vertex prediction at each inference step.</b>
         </h1>
@@ -327,7 +336,8 @@ ReferFormer is trained on both image and video datasets.</b></p>
       <div class="column is-full-width">
         <h2 class="title is-4">Prediction Visualization</h2>
         <!-- <h1><b>Zero-Shot Segmentation</b></h1> -->
-        <img id="refcocog" width="100%" src="images/refcocog.png">
+        <img id="refcocog1" width="100%" src="images/refcocog1.png">
+        <img id="refcocog2" width="100%" src="images/refcocog2.png">
         <h1>
           <p style="font-family:Times New Roman"><b>Figure 5. The results of LAVT (top), SeqTR (middle), and PolyFormer (bottom) on RefCOCOg test set. </b>
         </h1>
